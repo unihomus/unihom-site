@@ -51,7 +51,7 @@ export default async function Home() {
 					className="md:text-8xl text-5xl"
 					style={{ textShadow: "-5px 5px 5px grey" }}
 				>
-					UNIHOM
+					UNIHOM Joe
 				</h1>
 				<p
 					className="text-xl"
