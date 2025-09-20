@@ -34,17 +34,14 @@ export default async function Home() {
 
 	return (
 		<main className="flex flex-col justify-center items-center bg-transparent gap-12">
-			<div
-				className="relative top-0 left-0 -z-10 -mt-30"
-				style={{ width: "1920px" }}
-			>
+			<div className="relative top-0 left-0 -z-10 -mt-30">
 				<Image
 					src={heroImage.publicUrl}
 					alt="hero-image"
 					quality={100}
-					width={1920}
-					height={1080}
-					className="object-cover"
+					width={5000}
+					height={100}
+					className="object-cover grow"
 				/>
 				{/* fade out for bottom edge of the hero image */}
 				<div className="absolute bottom-0 left-0 right-0 h-[800px] bg-gradient-to-t from-[#353137] via-[#black]/80 to-transparent" />
