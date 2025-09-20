@@ -8,7 +8,7 @@ import Link from "next/link";
 export default async function IndividualProject({
 	params,
 }: {
-	params: { slug: string };
+	params: Promise<{ slug: string }>;
 }) {
 	const cookieStore = await cookies();
 	const supabase = createClient(cookieStore as any); //work around for now
