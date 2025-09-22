@@ -46,7 +46,7 @@ export default async function Home() {
 				{/* fade out for bottom edge of the hero image */}
 				<div className="absolute bottom-0 left-0 right-0 h-[800px] bg-gradient-to-t from-[#353137] via-[#black]/80 to-transparent" />
 			</div>
-			<div className="flex flex-col justify-center items-center gap-4 absolute top-[35%] text-white">
+			<div className="flex flex-col justify-center items-center gap-4 absolute top-[10%] md:top-[35%] text-white">
 				<h1
 					className="md:text-8xl text-5xl"
 					style={{ textShadow: "-5px 5px 5px grey" }}
@@ -69,30 +69,13 @@ export default async function Home() {
 				</Link>
 			</div>
 
-			<div className="w-full flex flex-col gap-4 p-4">
-				<div className="flex flex-row items-center p-4">
-					<h2 className="self-start text-3xl font-semibold">Categories</h2>
-					<Link
-						href={"/products?category=all"}
-						className="ml-auto group"
-					>
-						<p className="p-[1px] font-semibold">Browse all products</p>
-						<span
-							// forlight mode underline animation:
-							// pathname === "/"
-							// 			? scrolled
-							// 				? "bg-black"
-							// 				: "bg-white"
-							// 			: "bg-black"
-							className={`block max-w-0 bg-white
-													group-hover:max-w-full 
-												 		group-focus-visible:max-w-full  transition-all duration-200 h-0.5`}
-						></span>
-					</Link>
-				</div>
+			<div className="w-full flex flex-col gap-4 p-8">
+				<h2 className="self-center lg:self-start text-3xl font-semibold">
+					Categories
+				</h2>
 
 				{/* Category Images */}
-				<div className="flex flex-row flex-wrap gap-5 justify-around">
+				<div className="flex flex-row flex-wrap gap-8 justify-around">
 					{data?.map((object) => {
 						switch (object.category_name) {
 							case "Armchairs":
