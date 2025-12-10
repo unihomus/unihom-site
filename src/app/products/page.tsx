@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import CategorySelector from "@/components/CategorySelector";
+import PaginationControll from "@/components/PaginationControll";
 
 export default async function productPage({
 	searchParams,
@@ -24,9 +25,21 @@ export default async function productPage({
 		.from("products")
 		.select(`*, product_category(id, category_name)`);
 
+	const { count } = await (await supabase)
+		.from("products")
+		.select("*", { count: "exact" });
+
+	const productPerPage = 5;
+
+	// if count returned null, set to 0
+	const totalPage = Math.ceil((count ?? 0) / productPerPage);
+
 	const searchQuery = await searchParams;
 
 	// console.log(data);
+	// console.log(categories);
+	// console.log(searchQuery);
+	// console.log(count);
 
 	return (
 		<div className="flex flex-row w-full justify-items-center justify-center">
@@ -46,10 +59,15 @@ export default async function productPage({
 				{/* empty search params? Show all, otherwise show category clicked */}
 				<div>
 					{searchQuery.category ? (
-						<div>Currently browsing category: {searchQuery.category}</div>
-					) : (
-						<p>Currently browsing category: All</p>
-					)}
+						categories?.some(
+							(category) =>
+								searchQuery.category === category.category_name.toLowerCase()
+						) ? (
+							<div>Currently browsing category: {searchQuery.category}</div>
+						) : (
+							<p>No products to display.</p>
+						)
+					) : null}
 				</div>
 
 				{categories && <CategorySelector categories={categories} />}
@@ -108,6 +126,7 @@ export default async function productPage({
 						<div>Nothing found</div>
 					)}
 				</div>
+				<PaginationControll totalPage={totalPage} />
 			</div>
 		</div>
 	);

@@ -25,6 +25,8 @@ export default async function ProductCard({
 				width={300}
 				height={350}
 				alt={product.slug + "-image"}
+				priority={false}
+				// style={{ width: "auto", height: "auto"}}
 				className="flex-auto rounded-md h-100"
 			/>
 			<div

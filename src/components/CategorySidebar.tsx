@@ -1,6 +1,11 @@
 "use client";
 
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import {
+	usePathname,
+	useSearchParams,
+	useRouter,
+	redirect,
+} from "next/navigation";
 import { useCallback, useState, useEffect } from "react";
 
 export default function CategorySidebar({
@@ -15,30 +20,39 @@ export default function CategorySidebar({
 	const [selectedCategory, setSelectedCategory] = useState("");
 
 	useEffect(() => {
-		const paramQuery = searchParams.get("category");
-		// console.log("paramQuery:", paramQuery);
-		if (paramQuery) {
-			setSelectedCategory(paramQuery);
+		const paramFilter = searchParams.get("category");
+		if (paramFilter) {
+			setSelectedCategory(paramFilter);
 		} else {
 			setSelectedCategory("all");
 		}
-	});
+	}, [searchParams]);
 
-	const createQueryString = useCallback(
-		(name: string, value: string) => {
-			const params = new URLSearchParams(searchParams.toString());
-			params.set(name, value);
+	const createQueryString = (updates: { [key: string]: string | null }) => {
+		const params = new URLSearchParams(window.location.search);
 
-			return params.toString();
-		},
-		[searchParams]
-	);
+		Object.entries(updates).forEach(([key, value]) => {
+			if (value === null) {
+				params.delete(key);
+			} else {
+				params.set(key, value);
+			}
+		});
+
+		return params.toString();
+	};
 
 	const handleClick = (category: string) => {
 		setSelectedCategory(category);
-		router.push(
-			pathname + "?" + createQueryString("category", category.toLowerCase())
-		);
+		if (category !== "all") {
+			router.push(
+				pathname +
+					"?" +
+					createQueryString({ category: category.toLowerCase(), page: "1" })
+			);
+		} else {
+			redirect("/products");
+		}
 	};
 
 	return (

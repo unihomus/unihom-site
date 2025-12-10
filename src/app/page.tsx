@@ -37,6 +37,7 @@ export default async function Home() {
 			<div className="relative top-0 left-0 -z-10 -mt-30">
 				<Image
 					src={heroImage.publicUrl}
+					priority={false}
 					alt="hero-image"
 					quality={100}
 					width={5000}

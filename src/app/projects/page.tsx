@@ -14,7 +14,7 @@ export default async function ProjectsPage() {
 	// console.log(projects);
 
 	return (
-		<div className="flex flex-col gap-12">
+		<div className="flex flex-col gap-12 p-8">
 			<h1 className="text-3xl font-semibold">Projects</h1>
 			{projects?.length ? (
 				projects?.map((project) => (

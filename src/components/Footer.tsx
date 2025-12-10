@@ -14,14 +14,23 @@ export default async function Footer() {
 		.from("product_category")
 		.select("*");
 
-	// console.log(categories);
+	const { data: projects } = await (await supabase)
+		.from("projects")
+		.select("*");
+
+	// console.log(projects);
 
 	return (
 		<footer className="p-4 flex flex-col justify-around items-center bg-black/50 gap-4">
 			<div className="flex flex-row justify-around gap-4 w-full">
 				{/* Product section */}
 				<div className="flex flex-col gap-2">
-					<p className="text-2xl font-semibold">Products</p>
+					<Link
+						href={"/products"}
+						className="text-2xl font-semibold"
+					>
+						Products
+					</Link>
 					<div className="flex flex-col gap-2 pb-10">
 						{categories?.length
 							? categories?.map((category) => (
@@ -34,7 +43,7 @@ export default async function Footer() {
 										<span
 											className={`block max-w-0
 													group-hover:max-w-full 
-												 		group-focus-visible:max-w-full  transition-all duration-200 h-0.5 bg-white
+												 		group-focus-visible:max-w-full transition-all duration-200 h-0.5 bg-white
 														`}
 										></span>
 									</Link>
@@ -45,18 +54,41 @@ export default async function Footer() {
 
 				{/* project section */}
 				<div className="flex flex-col gap-2">
-					<p className="text-2xl font-semibold">Projects</p>
+					<Link
+						href={"/projects"}
+						className="text-2xl font-semibold"
+					>
+						Projects
+					</Link>
+
+					<div className="flex flex-col gap-2 pb-10">
+						{projects?.map((obj) => (
+							<Link
+								key={obj.id}
+								href={`/projects/${obj.slug}`}
+								className="group relative text-xl w-fit"
+							>
+								{obj.name}
+								<span
+									className={`block max-w-0
+													group-hover:max-w-full 
+												 		group-focus-visible:max-w-full transition-all duration-200 h-0.5 bg-white
+														`}
+								></span>
+							</Link>
+						))}
+					</div>
 				</div>
 
 				{/* contact section */}
 				<div className="flex flex-col gap-2">
-					<p className="text-2xl font-semibold">Contact</p>
+					<p className="text-2xl font-semibold">Address</p>
 				</div>
 			</div>
 
-			<div>
-				<p className="text-xl self-end">UNIHOM. All rights reserved 2025.</p>
-				<p className="text-xl self-end">Designed by Joe.</p>
+			<div className="flex flex-col justify-center items-center">
+				<p className="">UNIHOM. All rights reserved 2025.</p>
+				<p className="">Designed by Joe.</p>
 			</div>
 		</footer>
 	);
