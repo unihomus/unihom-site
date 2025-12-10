@@ -15,30 +15,33 @@ export default function CategorySelector({
 	const [selectedCategory, setSelectedCategory] = useState("");
 
 	useEffect(() => {
-		const paramQuery = searchParams.get("category");
-		if (paramQuery) {
-			setSelectedCategory(paramQuery);
+		const paramFilter = searchParams.get("category");
+		if (paramFilter) {
+			setSelectedCategory(paramFilter);
 		} else {
 			setSelectedCategory("all");
 		}
-	});
+	}, [searchParams]);
 
-	const createQueryString = useCallback(
-		(name: string, value: string) => {
-			const params = new URLSearchParams(searchParams.toString());
-			params.set(name, value);
+	const createQueryString = (updates: { [key: string]: string | null }) => {
+		const params = new URLSearchParams(window.location.search);
 
-			return params.toString();
-		},
-		[searchParams]
-	);
+		Object.entries(updates).forEach(([key, value]) => {
+			if (value === null) {
+				params.delete(key);
+			} else {
+				params.set(key, value);
+			}
+		});
+
+		return params.toString();
+	};
 
 	const handleClick = (category: string) => {
 		setSelectedCategory(category);
 		router.push(
-			pathname + "?" + createQueryString("category", category.toLowerCase())
+			pathname + "?" + createQueryString({ category: category, page: "1" })
 		);
-		console.log(selectedCategory + ": " + category);
 	};
 
 	return (

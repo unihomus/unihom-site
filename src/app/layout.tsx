@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+// @ts-ignore: side-effect import of global CSS (no type declarations)
 import "./globals.css";
 import Nav from "@/components/Nav/Nav";
 import Footer from "@/components/Footer";
@@ -30,7 +31,7 @@ export default function RootLayout({
 				className={`${geistSans.variable} ${geistMono.variable} antialiased flex bg-[#353137] min-h-screen dark flex-col gap-8`}
 			>
 				<Nav />
-				<div className="grow">{children}</div>
+				<div className="grow min-h-250">{children}</div>
 				<Footer />
 			</body>
 		</html>

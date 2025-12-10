@@ -18,8 +18,8 @@ export default function CategoryCard({
 	return (
 		<div
 			className="flex flex-col relative justify-center items-center group cursor-pointer transition-all duration-200 rounded-md
-										hover:scale-[1.03] hover:shadow-[0px_0px_15px_10px_rgba(255,255,255,0.3)]
-										focus-within:scale-[1.03] focus-within:shadow-[0px_0px_15px_10px_rgba(255,255,255,1)]"
+										 hover:shadow-[0px_0px_15px_10px_rgba(255,255,255,0.3)]
+										 focus-within:shadow-[0px_0px_15px_10px_rgba(255,255,255,1)]"
 		>
 			<Link
 				style={{ height: "auto", flex: "1 1 auto" }}
@@ -31,14 +31,23 @@ export default function CategoryCard({
 					alt={imageAlt}
 					width={width}
 					height={height}
-					style={{ height: "auto", flex: "1 1 auto" }}
+					style={{ width: "auto", height: "auto", flex: "1 1 auto" }}
+					priority={false}
 					className="transition-all duration-300 rounded-md"
 				/>
 				<div
-					className="absolute bottom-0 left-0 right-0 transition-all duration-200 bg-white/80 w-full text-center text-black pointer-events-none rounded-b-md
-												group-hover:translate-y-0.5"
+					className="absolute bottom-0 h-7 left-0 right-0 overflow-hidden transition-all duration-300 bg-white/80 text-black text-center pointer-events-none rounded-b-md
+											group-hover:h-[45%] group-hover:bg-black/40 group-hover:text-white"
 				>
-					<p className="text-lg font-semibold">{category}</p>
+					<div className="flex flex-col gap-2">
+						<p className="text-lg font-semibold">{category}</p>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id optio
+							fugiat ex maiores, repellendus molestias sequi alias eaque odio
+							dolore nemo facere corrupti provident delectus explicabo sunt
+							earum animi sed.
+						</p>
+					</div>
 				</div>
 			</Link>
 		</div>
